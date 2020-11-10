@@ -8,7 +8,6 @@ namespace WindowsFormsBus
 {
     public class Bus : Vehicle
     {
-       
         /// Ширина отрисовки троллейбуса
         private readonly int busWidth = 300;
         /// <summary>
