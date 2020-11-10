@@ -48,7 +48,7 @@ namespace WindowsFormsBus
             g.DrawLine(dopcolor, x + 120, y, x + 50, y - 20);
         }
         public void DrawRodThree(Graphics g, Pen dopcolor, float x, float y)
-        {         
+        {
 
             DrawRodTwo(g, dopcolor, x, y);
 
