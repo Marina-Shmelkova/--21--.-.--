@@ -8,7 +8,6 @@ namespace WindowsFormsBus
 {
     public class Bus : Vehicle
     {
-
         /// Ширина отрисовки троллейбуса
         private readonly int busWidth = 300;
         /// <summary>
@@ -57,7 +56,6 @@ namespace WindowsFormsBus
                     {
                         _startPosX += step;
                     }
-
                     break;
                 //влево
                 case Direction.Left:
@@ -104,13 +102,10 @@ namespace WindowsFormsBus
             Brush brWhite = new SolidBrush(Color.White);
             g.FillRectangle(brWhite, _startPosX, _startPosY + 20, 200, 20);
             //окно
-            Brush br_yellow = new SolidBrush(Color.Red);
+            Brush br_yellow = new SolidBrush(Color.Yellow);
             //лобовое
             g.FillRectangle(br_yellow, _startPosX + 190, _startPosY + 10, 10, 30);
             g.DrawRectangle(penFramework, _startPosX + 190, _startPosY + 10, 10, 30);//лобовое
-
-
-
             g.DrawRectangle(pen, _startPosX, _startPosY, 200, 50);
         }
 
