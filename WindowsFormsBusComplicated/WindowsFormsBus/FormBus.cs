@@ -18,21 +18,24 @@ namespace WindowsFormsBus
             InitializeComponent();
         }
 
-
+        public void SetBus(ITransport bus)
+        {
+            this.bus = bus;
+            Draw();
+        }
         /// Метод отрисовки троллейбуса
         /// </summary>
         private void Draw()
         {
             Bitmap bmp = new Bitmap(pictureBoxBus.Width, pictureBoxBus.Height);
             Graphics gr = Graphics.FromImage(bmp);
-            bus.DrawTransport(gr);
+            bus?.DrawTransport(gr);
             pictureBoxBus.Image = bmp;
         }
         /// Обработка нажатия кнопки "Создать автобус"
         private void buttonCreateBus_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-
             bus = new Bus(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue);
             bus.SetPosition(rnd.Next(50, 100), rnd.Next(50, 100), pictureBoxBus.Width,
            pictureBoxBus.Height);
@@ -51,7 +54,7 @@ namespace WindowsFormsBus
                 (!checkBoxTriangle.Checked && checkBoxRectangle.Checked && !checkBoxRound.Checked) ? 2 :
                 (!checkBoxTriangle.Checked && !checkBoxRectangle.Checked && checkBoxRound.Checked ? 3 : 0);
             bus = new Trolleybus(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
-           Color.Red, true, true, countRod, doorsForm);
+           Color.Yellow, true, true, countRod, doorsForm, true);
             bus.SetPosition(rnd.Next(50, 100), rnd.Next(50, 100), pictureBoxBus.Width,
            pictureBoxBus.Height);
             Draw();
@@ -69,16 +72,16 @@ namespace WindowsFormsBus
             switch (name)
             {
                 case "buttonUp":
-                    bus.MoveTransport(Direction.Up);
+                    bus?.MoveTransport(Direction.Up);
                     break;
                 case "buttonDown":
-                    bus.MoveTransport(Direction.Down);
+                    bus?.MoveTransport(Direction.Down);
                     break;
                 case "buttonLeft":
-                    bus.MoveTransport(Direction.Left);
+                    bus?.MoveTransport(Direction.Left);
                     break;
                 case "buttonRight":
-                    bus.MoveTransport(Direction.Right);
+                    bus?.MoveTransport(Direction.Right);
                     break;
             }
             Draw();
