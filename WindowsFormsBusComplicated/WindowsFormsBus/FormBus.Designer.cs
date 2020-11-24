@@ -35,7 +35,13 @@
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
             this.comboRod = new System.Windows.Forms.ComboBox();
+            this.groupBoxDoors = new System.Windows.Forms.GroupBox();
+            this.checkBoxTriangle = new System.Windows.Forms.CheckBox();
+            this.buttonCreateTrolleybus = new System.Windows.Forms.Button();
+            this.checkBoxRound = new System.Windows.Forms.CheckBox();
+            this.checkBoxRectangle = new System.Windows.Forms.CheckBox();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBus)).BeginInit();
+            this.groupBoxDoors.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxBus
@@ -55,7 +61,7 @@
             this.buttonCreate.TabIndex = 1;
             this.buttonCreate.Text = "Создать";
             this.buttonCreate.UseVisualStyleBackColor = true;
-            this.buttonCreate.Click += new System.EventHandler(this.buttonCreate_Click);
+            this.buttonCreate.Click += new System.EventHandler(this.buttonCreateBus_Click);
             // 
             // buttonUp
             // 
@@ -114,11 +120,65 @@
             this.comboRod.TabIndex = 6;
             this.comboRod.Text = "Количество рогов";
             // 
+            // groupBoxDoors
+            // 
+            this.groupBoxDoors.Controls.Add(this.checkBoxTriangle);
+            this.groupBoxDoors.Controls.Add(this.buttonCreateTrolleybus);
+            this.groupBoxDoors.Controls.Add(this.checkBoxRound);
+            this.groupBoxDoors.Controls.Add(this.checkBoxRectangle);
+            this.groupBoxDoors.Location = new System.Drawing.Point(582, 14);
+            this.groupBoxDoors.Name = "groupBoxDoors";
+            this.groupBoxDoors.Size = new System.Drawing.Size(155, 110);
+            this.groupBoxDoors.TabIndex = 9;
+            this.groupBoxDoors.TabStop = false;
+            this.groupBoxDoors.Text = "Форма дверей";
+            // 
+            // checkBoxTriangle
+            // 
+            this.checkBoxTriangle.AutoSize = true;
+            this.checkBoxTriangle.Location = new System.Drawing.Point(6, 64);
+            this.checkBoxTriangle.Name = "checkBoxTriangle";
+            this.checkBoxTriangle.Size = new System.Drawing.Size(93, 17);
+            this.checkBoxTriangle.TabIndex = 2;
+            this.checkBoxTriangle.Text = "Треугольные";
+            this.checkBoxTriangle.UseVisualStyleBackColor = true;
+            // 
+            // buttonCreateTrolleybus
+            // 
+            this.buttonCreateTrolleybus.Location = new System.Drawing.Point(0, 87);
+            this.buttonCreateTrolleybus.Name = "buttonCreateTrolleybus";
+            this.buttonCreateTrolleybus.Size = new System.Drawing.Size(150, 23);
+            this.buttonCreateTrolleybus.TabIndex = 6;
+            this.buttonCreateTrolleybus.Text = "Создать троллейбус";
+            this.buttonCreateTrolleybus.UseVisualStyleBackColor = true;
+            this.buttonCreateTrolleybus.Click += new System.EventHandler(this.buttonCreateTrolleybus_Click);
+            // 
+            // checkBoxRound
+            // 
+            this.checkBoxRound.AutoSize = true;
+            this.checkBoxRound.Location = new System.Drawing.Point(6, 41);
+            this.checkBoxRound.Name = "checkBoxRound";
+            this.checkBoxRound.Size = new System.Drawing.Size(99, 17);
+            this.checkBoxRound.TabIndex = 1;
+            this.checkBoxRound.Text = "Закругленные";
+            this.checkBoxRound.UseVisualStyleBackColor = true;
+            // 
+            // checkBoxRectangle
+            // 
+            this.checkBoxRectangle.AutoSize = true;
+            this.checkBoxRectangle.Location = new System.Drawing.Point(6, 19);
+            this.checkBoxRectangle.Name = "checkBoxRectangle";
+            this.checkBoxRectangle.Size = new System.Drawing.Size(88, 17);
+            this.checkBoxRectangle.TabIndex = 0;
+            this.checkBoxRectangle.Text = "Квадратные";
+            this.checkBoxRectangle.UseVisualStyleBackColor = true;
+            // 
             // FormBus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.groupBoxDoors);
             this.Controls.Add(this.comboRod);
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonDown);
@@ -129,6 +189,8 @@
             this.Name = "FormBus";
             this.Text = "Form1";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBus)).EndInit();
+            this.groupBoxDoors.ResumeLayout(false);
+            this.groupBoxDoors.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -142,6 +204,11 @@
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonLeft;
         private System.Windows.Forms.ComboBox comboRod;
+        private System.Windows.Forms.GroupBox groupBoxDoors;
+        private System.Windows.Forms.CheckBox checkBoxTriangle;
+        private System.Windows.Forms.Button buttonCreateTrolleybus;
+        private System.Windows.Forms.CheckBox checkBoxRound;
+        private System.Windows.Forms.CheckBox checkBoxRectangle;
     }
 }
 

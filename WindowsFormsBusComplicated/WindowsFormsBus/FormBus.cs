@@ -12,13 +12,13 @@ namespace WindowsFormsBus
 {
     public partial class FormBus : Form
     {
-        private Trolleybus bus;
+        private ITransport bus;
         public FormBus()
         {
             InitializeComponent();
         }
 
-       
+
         /// Метод отрисовки троллейбуса
         /// </summary>
         private void Draw()
@@ -28,17 +28,35 @@ namespace WindowsFormsBus
             bus.DrawTransport(gr);
             pictureBoxBus.Image = bmp;
         }
-        /// Обработка нажатия кнопки "Создать"
-        private void buttonCreate_Click(object sender, EventArgs e)
+        /// Обработка нажатия кнопки "Создать автобус"
+        private void buttonCreateBus_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            int countRod = Convert.ToInt32(comboRod.SelectedItem);
-            bus = new Trolleybus(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
-           Color.DarkGoldenrod, true, true, countRod);
+
+            bus = new Bus(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue);
             bus.SetPosition(rnd.Next(50, 100), rnd.Next(50, 100), pictureBoxBus.Width,
            pictureBoxBus.Height);
             Draw();
         }
+        /// <summary>
+        /// Обработка нажатия кнопки "Создать троллейбус"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonCreateTrolleybus_Click(object sender, EventArgs e)
+        {
+            Random rnd = new Random();
+            int countRod = Convert.ToInt32(comboRod.SelectedItem);
+            int doorsForm = (checkBoxTriangle.Checked && !checkBoxRectangle.Checked && !checkBoxRound.Checked) ? 1 :
+                (!checkBoxTriangle.Checked && checkBoxRectangle.Checked && !checkBoxRound.Checked) ? 2 :
+                (!checkBoxTriangle.Checked && !checkBoxRectangle.Checked && checkBoxRound.Checked ? 3 : 0);
+            bus = new Trolleybus(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
+           Color.Red, true, true, countRod, doorsForm);
+            bus.SetPosition(rnd.Next(50, 100), rnd.Next(50, 100), pictureBoxBus.Width,
+           pictureBoxBus.Height);
+            Draw();
+        }
+
         /// <summary>
         /// Обработка нажатия кнопок управления
         /// </summary>
