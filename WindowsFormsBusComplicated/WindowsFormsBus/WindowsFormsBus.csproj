@@ -48,6 +48,7 @@
   <ItemGroup>
     <Compile Include="Bus.cs" />
     <Compile Include="BusStation.cs" />
+    <Compile Include="BusStationCollection.cs" />
     <Compile Include="Direction.cs" />
     <Compile Include="DirectionRod.cs" />
     <Compile Include="DopRod.cs" />

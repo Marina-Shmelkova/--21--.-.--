@@ -12,7 +12,7 @@ namespace WindowsFormsBus
         /// <summary>
         /// Массив объектов, которые храним
         /// </summary>
-        public readonly T[] _places;
+        public readonly List<T> _places;
         /// <summary>
         /// Ширина окна отрисовки
         /// </summary>
@@ -29,7 +29,10 @@ namespace WindowsFormsBus
         /// Размер парковочного места (высота)
         /// </summary>
         private readonly int _placeSizeHeight = 110;
-
+        /// <summary>
+        /// Максимальное количество мест на парковке
+        /// </summary>
+        private readonly int _maxCount;
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -39,9 +42,10 @@ namespace WindowsFormsBus
         {
             int width = picWidth / _placeSizeWidth;
             int height = picHeight / _placeSizeHeight;
-            _places = new T[width * height];
+            _places = new List<T>();
             pictureWidth = picWidth;
             pictureHeight = picHeight;
+            _maxCount = width * height;
 
         }
         /// <summary>
@@ -51,18 +55,14 @@ namespace WindowsFormsBus
         /// <param name="p">Парковка</param>
         /// <param name="car">Добавляемый автомобиль</param>
         /// <returns></returns>
-        public static bool operator +(BusStation<T, R> p, T bus)
+        public static bool operator +(BusStation<T, R> b, T bus)
         {
-            for (int i = 0; i < p._places.Length; i++)
+            if (b._places.Count >= b._maxCount)
             {
-                if (p._places[i] == null)
-                {
-                    bus.SetPosition(10 + p._placeSizeWidth * (int)(i / (int)(p.pictureHeight / p._placeSizeHeight)), 25 + p._placeSizeHeight * (int)(i % (int)(p.pictureHeight / p._placeSizeHeight)), p.pictureWidth, p.pictureHeight);
-                    p._places[i] = bus;
-                    return true;
-                }
+                return false;
             }
-            return false;
+            b._places.Add(bus);
+            return true;
         }
         /// <summary>
         /// Перегрузка оператора вычитания
@@ -71,17 +71,16 @@ namespace WindowsFormsBus
         /// <param name="p">Парковка</param>
         /// <param name="index">Индекс места, с которого пытаемся извлечь объект</param>
         /// <returns></returns>
-        public static T operator -(BusStation<T, R> p, int index)
+        public static T operator -(BusStation<T, R> b, int index)
         {
-            if ((index < p._places.Length) && (index >= 0))
+            if (index < -1 || index > b._places.Count)
             {
-                T bus = p._places[index];
-                p._places[index] = null;
-                return bus;
+                return null;
             }
-            return null;
+            T bus = b._places[index];
+            b._places.RemoveAt(index);
+            return bus;
         }
-
         public static bool operator >(BusStation<T, R> p, int index)
         {
             return p.count_operator() > index;
@@ -94,7 +93,7 @@ namespace WindowsFormsBus
         public int count_operator()
         {
             int count = 0;
-            for (int i = 0; i < _places.Length; ++i)
+            for (int i = 0; i < _places.Count; ++i)
             {
                 if (_places[i] != null)
                 {
@@ -110,9 +109,11 @@ namespace WindowsFormsBus
         public void Draw(Graphics g)
         {
             DrawMarking(g);
-            for (int i = 0; i < _places.Length; i++)
+            for (int i = 0; i < _places.Count; ++i)
             {
-                _places[i]?.DrawTransport(g);
+                _places[i].SetPosition(5 + i / (pictureHeight / _placeSizeHeight) * _placeSizeWidth + 5, i % (pictureHeight / _placeSizeHeight) *
+               _placeSizeHeight + 27, pictureWidth, pictureHeight);
+                _places[i].DrawTransport(g);
             }
         }
         private void DrawMarking(Graphics g)
@@ -125,6 +126,17 @@ namespace WindowsFormsBus
                     g.DrawLine(pen, i * _placeSizeWidth + 3, j * _placeSizeHeight + 3, i * _placeSizeWidth + _placeSizeWidth / 2 + 90, j * _placeSizeHeight + 3);
                 }
                 g.DrawLine(pen, i * _placeSizeWidth + 3, 3, i * _placeSizeWidth + 3, (pictureHeight / _placeSizeHeight) * _placeSizeHeight + 3);
+            }
+        }
+        public T this[int index]
+        {
+            get
+            {
+                if (index >= 0 && index < _maxCount)
+                {
+                    return _places[index];
+                }
+                return null;
             }
         }
     }
