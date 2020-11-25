@@ -54,7 +54,7 @@ namespace WindowsFormsBus
                 (!checkBoxTriangle.Checked && checkBoxRectangle.Checked && !checkBoxRound.Checked) ? 2 :
                 (!checkBoxTriangle.Checked && !checkBoxRectangle.Checked && checkBoxRound.Checked ? 3 : 0);
             bus = new Trolleybus(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
-           Color.Yellow, true, true, countRod, doorsForm, true);
+           Color.Yellow, true, true,true, countRod, doorsForm, true);
             bus.SetPosition(rnd.Next(50, 100), rnd.Next(50, 100), pictureBoxBus.Width,
            pictureBoxBus.Height);
             Draw();

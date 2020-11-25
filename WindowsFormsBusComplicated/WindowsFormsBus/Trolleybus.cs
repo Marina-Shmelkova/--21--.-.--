@@ -4,6 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Windows.Forms;
+
 namespace WindowsFormsBus
 {
     public class Trolleybus : Bus
@@ -17,7 +19,10 @@ namespace WindowsFormsBus
         /// Признак наличия дверей
         /// </summary>
         public bool Doors { private set; get; }
+        public bool Strip { private set; get; }
+        public string DoorsForm { private set; get; }
         private DopRod Rod;
+
         IDoorsElements DoorsElements;
         /// <summary>
         /// Конструктор
@@ -29,35 +34,61 @@ namespace WindowsFormsBus
         /// <param name="rodPantograph">Признак наличия переднего спойлера</param>
         /// <param name="doors">Признак наличия дверей</param>
 
-
         public Trolleybus(int maxSpeed, float weight, Color mainColor, Color dopColor,
-bool rodPantograph, bool doors, int rod, int doorsElements, bool flag) :
+bool rodPantograph, bool doors, bool strip, int rod, int doorsForm, bool flag) :
  base(maxSpeed, weight, mainColor, 300, 100)
         {
             DopColor = dopColor;
             RodPantograph = rodPantograph;
-            Doors = doors;
             Rod = new DopRod(rod);
-            Flag = flag;
-            if (doorsElements == 1)
+            Doors = doors;
+            Strip = strip;  
+            Flag = flag;        
+            if (doorsForm == 1)
             {
-                DoorsElements = new TriangleDoors(doorsElements, dopColor);
+                DoorsElements = new TriangleDoors(doorsForm, dopColor);
             }
-            if (doorsElements == 2)
+            if (doorsForm == 2)
             {
-                DoorsElements = new RectangleDoors(doorsElements, dopColor);
+                DoorsElements = new RectangleDoors(doorsForm, dopColor);
             }
-            if (doorsElements == 3)
+            if (doorsForm == 3)
             {
-                DoorsElements = new RoundDoors(doorsElements, dopColor);
+                DoorsElements = new RoundDoors(doorsForm, dopColor);
             }
         }
-        public Trolleybus(int maxSpeed, float weight, Color mainColor, Color dopColor, bool rodPantograph) :
+        public Trolleybus(int maxSpeed, float weight, Color mainColor, Color dopColor,bool rodPantograph, bool doors, bool strip) :
              base(maxSpeed, weight, mainColor, 100, 60)
         {
             DopColor = dopColor;
             DoorsElements = new RectangleDoors(3, dopColor);
+            Doors = doors;
             RodPantograph = rodPantograph;
+            Strip = strip;
+        }
+        public void SetDopColor(Color color)
+        {
+            DopColor = color;         
+        }
+        public void SetDoors(IDoorsElements doors)
+        {
+            DoorsElements = doors;
+            DoorsForm = DoorsElements.GetType().Name;
+            switch (DoorsForm)
+            {
+                case "RectangleDoors":
+                    DoorsElements = new RectangleDoors(3, DopColor);
+                    break;
+                case "RoundDoors":
+                    DoorsElements = new RoundDoors(3, DopColor);
+                    break;
+                case "TriangleDoors":
+                    DoorsElements = new TriangleDoors(3, DopColor);
+                    break;
+                default:
+                    break;
+            }
+
         }
         /// Отрисовка троллейбуса
         /// </summary>
@@ -65,8 +96,17 @@ bool rodPantograph, bool doors, int rod, int doorsElements, bool flag) :
         public override void DrawTransport(Graphics g)
         {
             Pen pen = new Pen(Color.Black);
-            base.DrawTransport(g);
-            DoorsElements.DrawElement(g, DopColor, _startPosX, _startPosY);
+            base.DrawTransport(g); 
+            if (Strip)
+            {
+                //Белая полоса
+                Brush brWhite = new SolidBrush(Color.White);
+                g.FillRectangle(brWhite, _startPosX, _startPosY + 20, 190, 20);
+            }
+            if (Doors)
+            {
+                DoorsElements.DrawElement(g, DopColor, _startPosX, _startPosY);
+            }
             if (Flag)
             {
                 Rod.DrawRod(g, pen, _startPosX, _startPosY);
@@ -78,8 +118,7 @@ bool rodPantograph, bool doors, int rod, int doorsElements, bool flag) :
                 g.DrawLine(pen, _startPosX + 100, _startPosY, _startPosX + 20, _startPosY - 20);
                 g.DrawLine(pen, _startPosX + 20, _startPosY - 20, _startPosX + 10, _startPosY - 20);
                 g.DrawLine(pen, _startPosX + 100, _startPosY, _startPosX + 20, _startPosY - 20);
-            }
-
-        }
+            }           
+        }       
     }
 }
