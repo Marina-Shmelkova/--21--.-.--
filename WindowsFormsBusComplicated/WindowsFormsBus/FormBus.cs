@@ -16,6 +16,7 @@ namespace WindowsFormsBus
         public FormBus()
         {
             InitializeComponent();
+            comboCountDoors.Items.AddRange(new string[] { "1", "2", "3" });
         }
 
         public void SetBus(ITransport bus)
@@ -49,12 +50,12 @@ namespace WindowsFormsBus
         private void buttonCreateTrolleybus_Click(object sender, EventArgs e)
         {
             Random rnd = new Random();
-            int countRod = Convert.ToInt32(comboRod.SelectedItem);
-            int doorsForm = (checkBoxTriangle.Checked && !checkBoxRectangle.Checked && !checkBoxRound.Checked) ? 1 :
-                (!checkBoxTriangle.Checked && checkBoxRectangle.Checked && !checkBoxRound.Checked) ? 2 :
-                (!checkBoxTriangle.Checked && !checkBoxRectangle.Checked && checkBoxRound.Checked ? 3 : 0);
+            int countDoors = Convert.ToInt32(comboCountDoors.SelectedItem);
+            string doorsForm = (checkBoxTriangle.Checked && !checkBoxRectangle.Checked && !checkBoxRound.Checked) ? "TriangleDoors" :
+                (!checkBoxTriangle.Checked && checkBoxRectangle.Checked && !checkBoxRound.Checked) ? "RectangleDoors" :
+                (!checkBoxTriangle.Checked && !checkBoxRectangle.Checked && checkBoxRound.Checked ? "RoundDoors" : "0");
             bus = new Trolleybus(rnd.Next(100, 300), rnd.Next(1000, 2000), Color.Blue,
-           Color.Yellow, true, true,true, countRod, doorsForm, true);
+           Color.Yellow, true, true, true, countDoors, doorsForm);
             bus.SetPosition(rnd.Next(50, 100), rnd.Next(50, 100), pictureBoxBus.Width,
            pictureBoxBus.Height);
             Draw();

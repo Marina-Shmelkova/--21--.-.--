@@ -50,8 +50,6 @@
     <Compile Include="BusStation.cs" />
     <Compile Include="BusStationCollection.cs" />
     <Compile Include="Direction.cs" />
-    <Compile Include="DirectionRod.cs" />
-    <Compile Include="DopRod.cs" />
     <Compile Include="FormBus.cs">
       <SubType>Form</SubType>
     </Compile>

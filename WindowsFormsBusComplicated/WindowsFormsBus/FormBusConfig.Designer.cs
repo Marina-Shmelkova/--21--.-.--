@@ -59,6 +59,10 @@
             this.labelRectangle = new System.Windows.Forms.Label();
             this.labelRound = new System.Windows.Forms.Label();
             this.labelModification = new System.Windows.Forms.Label();
+            this.labelone = new System.Windows.Forms.Label();
+            this.labeltwo = new System.Windows.Forms.Label();
+            this.labelthree = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.groupBoxColor.SuspendLayout();
             this.panelBus.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxConfig)).BeginInit();
@@ -273,6 +277,8 @@
             // checkBoxStrip
             // 
             this.checkBoxStrip.AutoSize = true;
+            this.checkBoxStrip.Checked = true;
+            this.checkBoxStrip.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxStrip.Location = new System.Drawing.Point(161, 88);
             this.checkBoxStrip.Name = "checkBoxStrip";
             this.checkBoxStrip.Size = new System.Drawing.Size(64, 17);
@@ -283,6 +289,8 @@
             // checkBoxDoors
             // 
             this.checkBoxDoors.AutoSize = true;
+            this.checkBoxDoors.Checked = true;
+            this.checkBoxDoors.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxDoors.Location = new System.Drawing.Point(161, 64);
             this.checkBoxDoors.Name = "checkBoxDoors";
             this.checkBoxDoors.Size = new System.Drawing.Size(59, 17);
@@ -293,6 +301,8 @@
             // checkBoxRod
             // 
             this.checkBoxRod.AutoSize = true;
+            this.checkBoxRod.Checked = true;
+            this.checkBoxRod.CheckState = System.Windows.Forms.CheckState.Checked;
             this.checkBoxRod.Location = new System.Drawing.Point(161, 41);
             this.checkBoxRod.Name = "checkBoxRod";
             this.checkBoxRod.Size = new System.Drawing.Size(50, 17);
@@ -420,11 +430,57 @@
             this.labelModification.DragDrop += new System.Windows.Forms.DragEventHandler(this.labelDoorsForm_DragDop);
             this.labelModification.DragEnter += new System.Windows.Forms.DragEventHandler(this.labelDoorsForm_DragEnter);
             // 
+            // labelone
+            // 
+            this.labelone.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelone.Location = new System.Drawing.Point(525, 390);
+            this.labelone.Name = "labelone";
+            this.labelone.Size = new System.Drawing.Size(29, 23);
+            this.labelone.TabIndex = 18;
+            this.labelone.Text = "1";
+            this.labelone.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelone.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelCountDoors_MouseDown);
+            // 
+            // labeltwo
+            // 
+            this.labeltwo.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labeltwo.Location = new System.Drawing.Point(563, 390);
+            this.labeltwo.Name = "labeltwo";
+            this.labeltwo.Size = new System.Drawing.Size(29, 23);
+            this.labeltwo.TabIndex = 20;
+            this.labeltwo.Text = "2";
+            this.labeltwo.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labeltwo.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelCountDoors_MouseDown);
+            // 
+            // labelthree
+            // 
+            this.labelthree.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.labelthree.Location = new System.Drawing.Point(598, 390);
+            this.labelthree.Name = "labelthree";
+            this.labelthree.Size = new System.Drawing.Size(29, 23);
+            this.labelthree.TabIndex = 21;
+            this.labelthree.Text = "3";
+            this.labelthree.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.labelthree.MouseDown += new System.Windows.Forms.MouseEventHandler(this.labelCountDoors_MouseDown);
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(522, 377);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(105, 13);
+            this.label2.TabIndex = 22;
+            this.label2.Text = "Количество дверей";
+            // 
             // FormBusConfig
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.labelthree);
+            this.Controls.Add(this.labeltwo);
+            this.Controls.Add(this.labelone);
             this.Controls.Add(this.labelModification);
             this.Controls.Add(this.groupBoxDoors);
             this.Controls.Add(this.buttonClose);
@@ -445,6 +501,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDownSpeed)).EndInit();
             this.groupBoxDoors.ResumeLayout(false);
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -481,5 +538,9 @@
         private System.Windows.Forms.Label labelRectangle;
         private System.Windows.Forms.Label labelRound;
         private System.Windows.Forms.Label labelModification;
+        private System.Windows.Forms.Label labelone;
+        private System.Windows.Forms.Label labeltwo;
+        private System.Windows.Forms.Label labelthree;
+        private System.Windows.Forms.Label label2;
     }
 }

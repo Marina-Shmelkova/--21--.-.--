@@ -109,7 +109,7 @@ DragDropEffects.Copy);
                 case "Троллейбус":
                     bus = new Trolleybus((int)numericUpDownSpeed.Value,
                    (int)numericUpDownWeight.Value, Color.White, Color.Black,
-                    checkBoxRod.Checked, checkBoxDoors.Checked, checkBoxStrip.Checked);
+                    checkBoxRod.Checked, checkBoxDoors.Checked, checkBoxStrip.Checked, 3, "RectangleDoors");
                     break;
             }
             DrawBus();
@@ -137,7 +137,7 @@ DragDropEffects.Copy);
             Color color = (sender as Panel).BackColor;
             (sender as Panel).DoDragDrop(color, DragDropEffects.Move | DragDropEffects.Copy);
 
-        }     
+        }
         private void buttonAdd_Click(object sender, EventArgs e)
         {
             eventAddBus?.Invoke(bus);
@@ -164,7 +164,7 @@ DragDropEffects.Copy);
                 e.Effect = DragDropEffects.None;
             }
         }
-       
+
         private void labelDoorsForm_DragDop(object sender, DragEventArgs e)
         {
             if (bus is Trolleybus b)
@@ -192,18 +192,43 @@ DragDropEffects.Copy);
                 switch (((Label)sender).Text)
                 {
                     case "Квадратные":
-                        doors = new RectangleDoors(3, b.DopColor);
+                        doors = new RectangleDoors(b.count_Doors, b.DopColor);
                         break;
                     case "Круглые":
-                        doors = new RoundDoors(3, b.DopColor);
+                        doors = new RoundDoors(b.count_Doors, b.DopColor);
                         break;
                     case "Треугольные":
-                        doors = new TriangleDoors(3, b.DopColor);
+                        doors = new TriangleDoors(b.count_Doors, b.DopColor);
                         break;
                 }
                 if (doors != null)
                 {
-                    ((Label)sender).DoDragDrop(doors, DragDropEffects.Move | DragDropEffects.Copy);                  
+                    ((Label)sender).DoDragDrop(doors, DragDropEffects.Move | DragDropEffects.Copy);
+                }
+            }
+        }
+        private void labelCountDoors_MouseDown(object sender, MouseEventArgs e)
+        {
+            if (bus is Trolleybus b)
+            {
+                IDoorsElements doors = null;
+                int count = Convert.ToInt32(((Label)sender).Text);
+                switch (b.DoorsForm)
+                {
+                    case "RectangleDoors":
+                        doors = new RectangleDoors(count, b.DopColor);
+                        break;
+                    case "RoundDoors":
+                        doors = new RoundDoors(count, b.DopColor);
+                        break;
+                    case "TriangleDoors":
+                        doors = new TriangleDoors(count, b.DopColor);
+                        break;
+                }
+                if (doors != null)
+                {
+                    ((Label)sender).DoDragDrop(doors, DragDropEffects.Move | DragDropEffects.Copy);
+                    b.SetCountDoors(count);
                 }
             }
         }
