@@ -13,72 +13,168 @@ namespace WindowsFormsBus
 {
     public partial class FormBusStation : Form
     {
-        private readonly BusStation<Bus, RectangleDoors> station;
+
+        private readonly Stack<Vehicle> busStack;
+        private readonly BusStationCollection stationCollection;
         public FormBusStation()
         {
             InitializeComponent();
-            station = new BusStation<Bus, RectangleDoors>(pictureBoxBusStation.Width,
-           pictureBoxBusStation.Height);
+            stationCollection = new BusStationCollection(pictureBoxBusStation.Width,
+pictureBoxBusStation.Height);
+            busStack = new Stack<Vehicle>();
             Draw();
         }
+        /// Заполнение listBoxLevels
+        /// </summary>
+        private void ReloadLevels()
+        {
+            int index = listBoxBusStation.SelectedIndex;
+            listBoxBusStation.Items.Clear();
+            for (int i = 0; i < stationCollection.Keys.Count; i++)
+            {
+                listBoxBusStation.Items.Add(stationCollection.Keys[i]);
+            }
+            if (listBoxBusStation.Items.Count > 0 && (index == -1 || index >=
+           listBoxBusStation.Items.Count))
+            {
+                listBoxBusStation.SelectedIndex = 0;
+            }
+            else if (listBoxBusStation.Items.Count > 0 && index > -1 && index <
+           listBoxBusStation.Items.Count)
+            {
+                listBoxBusStation.SelectedIndex = index;
+            }
+        }
+        /// Метод отрисовки парковки
+        /// </summary>
         private void Draw()
         {
-            Bitmap bmp = new Bitmap(pictureBoxBusStation.Width, pictureBoxBusStation.Height);
-            Graphics gr = Graphics.FromImage(bmp);
-            station.Draw(gr);
-            pictureBoxBusStation.Image = bmp;
+            if (listBoxBusStation.SelectedIndex > -1)
+            {//если выбран один из пуктов в listBox (при старте программы ни один пунктне будет выбран и может возникнуть ошибка, если мы попытаемся обратиться к элементу listBox)
+                Bitmap bmp = new Bitmap(pictureBoxBusStation.Width,
+                pictureBoxBusStation.Height);
+                Graphics gr = Graphics.FromImage(bmp);
+                stationCollection[listBoxBusStation.SelectedItem.ToString()].Draw(gr);
+                pictureBoxBusStation.Image = bmp;
+            }
         }
-        ///
-        private void buttonSetBus_Click(object sender, EventArgs e)
+        /// /// Обработка нажатия кнопки "Добавить парковку"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonAddBusStation_Click(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (string.IsNullOrEmpty(textBoxNewLevelName.Text))
             {
-                var bus = new Bus(100, 1000, dialog.Color);
-                if (station + bus)
+                MessageBox.Show("Введите название парковки", "Ошибка",
+               MessageBoxButtons.OK, MessageBoxIcon.Error);
+                return;
+            }
+            stationCollection.AddBusStation(textBoxNewLevelName.Text);
+            textBoxNewLevelName.Text = "";
+            ReloadLevels();
+        }
+        /// Обработка нажатия кнопки "Удалить парковку"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonDelBusStation_Click(object sender, EventArgs e)
+        {
+            if (listBoxBusStation.SelectedIndex > -1)
+            {
+                if (MessageBox.Show($"Удалить парковку {listBoxBusStation.SelectedItem.ToString()}?", "Удаление", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
-                    Draw();
-                }
-                else
-                {
-                    MessageBox.Show("Автовокзал переполнен");
+
+                    {
+                        stationCollection.DelBusStation(listBoxBusStation.SelectedItem.ToString());
+                        ReloadLevels();
+                        Draw();
+                    }
                 }
             }
         }
-        private void buttonSetTrolleybus_Click(object sender, EventArgs e)
+        /// Обработка нажатия кнопки "Припарковать автобус"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSetBus_Click(object sender, EventArgs e)
         {
-            ColorDialog dialog = new ColorDialog();
-            if (dialog.ShowDialog() == DialogResult.OK)
+            if (listBoxBusStation.SelectedIndex > -1)
             {
-                ColorDialog dialogDop = new ColorDialog();
-                if (dialogDop.ShowDialog() == DialogResult.OK)
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
                 {
-                    var bus = new Trolleybus(100, 1000, dialog.Color, dialogDop.Color, true);
-                    if (station + bus)
+                    var bus = new Bus(100, 1000, dialog.Color);
+                    if (stationCollection[listBoxBusStation.SelectedItem.ToString()] +
+                   bus)
                     {
                         Draw();
                     }
                     else
                     {
-                        MessageBox.Show("Автовокзал переполнен");
+                        MessageBox.Show("Парковка переполнена");
                     }
                 }
             }
         }
+        /// <summary>
+        /// Обработка нажатия кнопки "Припарковать троллейбус"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void buttonSetTrolleybus_Click(object sender, EventArgs e)
+        {
+            if (listBoxBusStation.SelectedIndex > -1)
+            {
+                ColorDialog dialog = new ColorDialog();
+                if (dialog.ShowDialog() == DialogResult.OK)
+                {
+                    ColorDialog dialogDop = new ColorDialog();
+                    if (dialogDop.ShowDialog() == DialogResult.OK)
+                    {
+                        var trolleybus = new Trolleybus(100, 1000, dialog.Color,
+                       dialogDop.Color, true);
+                        if (stationCollection[listBoxBusStation.SelectedItem.ToString()]
+                       + trolleybus)
+                        {
+                            Draw();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Парковка переполнена");
+                        }
+                    }
+                }
+            }
+        }
+
+        /// <summary>
+        /// Обработка нажатия кнопки "Забрать"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void buttonTakeBus_Click(object sender, EventArgs e)
         {
-            if (maskedTextBoxBus.Text != "")
+            if (listBoxBusStation.SelectedIndex > -1 && maskedTextBoxBus.Text != "")
             {
-                var bus = station - Convert.ToInt32(maskedTextBoxBus.Text);
+                var bus = stationCollection[listBoxBusStation.SelectedItem.ToString()] - Convert.ToInt32(maskedTextBoxBus.Text);
                 if (bus != null)
                 {
-                    FormBus form = new FormBus();
-                    form.SetBus(bus);
-                    form.ShowDialog();
+                    busStack.Push(bus);
                 }
+                maskedTextBoxBus.Text = "";
                 Draw();
             }
         }
+        /// Метод обработки выбора элемента на listBoxLevels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void listBoxBusStation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Draw();
+        }
+        ///
 
         private void buttonCompare_Click(object sender, EventArgs e)
         {
@@ -89,11 +185,11 @@ namespace WindowsFormsBus
             }
             else { return; }
 
-            if (station > index)
+            if (stationCollection[listBoxBusStation.SelectedItem.ToString()] > index)
             {
                 MessageBox.Show("Количество заполненных мест более  " + index);
             }
-            else if (station < index)
+            else if (stationCollection[listBoxBusStation.SelectedItem.ToString()] < index)
             {
                 MessageBox.Show("Количество заполненных мест менее " + index);
             }
@@ -101,6 +197,20 @@ namespace WindowsFormsBus
             else
             {
                 MessageBox.Show("Количество заполненных мест = " + index);
+            }
+        }
+
+        private void buttonStack_Click(object sender, EventArgs e)
+        {
+            if (busStack.Count() > 0)
+            {
+                FormBus form = new FormBus();
+                form.SetBus(busStack.Pop());
+                form.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Стек пуст");
             }
         }
     }

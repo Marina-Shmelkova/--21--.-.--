@@ -29,15 +29,21 @@
         private void InitializeComponent()
         {
             this.pictureBoxBusStation = new System.Windows.Forms.PictureBox();
-            this.buttonBus = new System.Windows.Forms.Button();
-            this.buttonTrolleybus = new System.Windows.Forms.Button();
+            this.buttonDeleteBusStation = new System.Windows.Forms.Button();
+            this.listBoxBusStation = new System.Windows.Forms.ListBox();
+            this.textBoxNewLevelName = new System.Windows.Forms.TextBox();
+            this.buttonStack = new System.Windows.Forms.Button();
+            this.labelCompare = new System.Windows.Forms.Label();
+            this.maskedTextBoxCompare = new System.Windows.Forms.MaskedTextBox();
+            this.buttonCompare = new System.Windows.Forms.Button();
             this.groupBoxStation = new System.Windows.Forms.GroupBox();
             this.OutPutBus = new System.Windows.Forms.Button();
             this.maskedTextBoxBus = new System.Windows.Forms.MaskedTextBox();
             this.labelBus = new System.Windows.Forms.Label();
-            this.labelCompare = new System.Windows.Forms.Label();
-            this.maskedTextBoxCompare = new System.Windows.Forms.MaskedTextBox();
-            this.buttonCompare = new System.Windows.Forms.Button();
+            this.buttonTrolleybus = new System.Windows.Forms.Button();
+            this.buttonBus = new System.Windows.Forms.Button();
+            this.buttonAddBusStation = new System.Windows.Forms.Button();
+            this.labelStation = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBusStation)).BeginInit();
             this.groupBoxStation.SuspendLayout();
             this.SuspendLayout();
@@ -51,35 +57,77 @@
             this.pictureBoxBusStation.TabIndex = 1;
             this.pictureBoxBusStation.TabStop = false;
             // 
-            // buttonBus
+            // buttonDeleteBusStation
             // 
-            this.buttonBus.Location = new System.Drawing.Point(641, 12);
-            this.buttonBus.Name = "buttonBus";
-            this.buttonBus.Size = new System.Drawing.Size(96, 42);
-            this.buttonBus.TabIndex = 2;
-            this.buttonBus.Text = "Припарковать автобус";
-            this.buttonBus.UseVisualStyleBackColor = true;
-            this.buttonBus.Click += new System.EventHandler(this.buttonSetBus_Click);
+            this.buttonDeleteBusStation.Location = new System.Drawing.Point(634, 102);
+            this.buttonDeleteBusStation.Name = "buttonDeleteBusStation";
+            this.buttonDeleteBusStation.Size = new System.Drawing.Size(122, 23);
+            this.buttonDeleteBusStation.TabIndex = 22;
+            this.buttonDeleteBusStation.Text = "Удалить парковку";
+            this.buttonDeleteBusStation.UseVisualStyleBackColor = true;
+            this.buttonDeleteBusStation.Click += new System.EventHandler(this.buttonDelBusStation_Click);
             // 
-            // buttonTrolleybus
+            // listBoxBusStation
             // 
-            this.buttonTrolleybus.Location = new System.Drawing.Point(641, 60);
-            this.buttonTrolleybus.Name = "buttonTrolleybus";
-            this.buttonTrolleybus.Size = new System.Drawing.Size(96, 40);
-            this.buttonTrolleybus.TabIndex = 3;
-            this.buttonTrolleybus.Text = "Припарковать троллейбус";
-            this.buttonTrolleybus.UseVisualStyleBackColor = true;
-            this.buttonTrolleybus.Click += new System.EventHandler(this.buttonSetTrolleybus_Click);
+            this.listBoxBusStation.FormattingEnabled = true;
+            this.listBoxBusStation.Location = new System.Drawing.Point(634, 40);
+            this.listBoxBusStation.Name = "listBoxBusStation";
+            this.listBoxBusStation.Size = new System.Drawing.Size(122, 56);
+            this.listBoxBusStation.TabIndex = 21;
+            this.listBoxBusStation.Click += new System.EventHandler(this.listBoxBusStation_SelectedIndexChanged);
+            // 
+            // textBoxNewLevelName
+            // 
+            this.textBoxNewLevelName.Location = new System.Drawing.Point(720, 14);
+            this.textBoxNewLevelName.Name = "textBoxNewLevelName";
+            this.textBoxNewLevelName.Size = new System.Drawing.Size(39, 20);
+            this.textBoxNewLevelName.TabIndex = 20;
+            // 
+            // buttonStack
+            // 
+            this.buttonStack.Location = new System.Drawing.Point(634, 334);
+            this.buttonStack.Name = "buttonStack";
+            this.buttonStack.Size = new System.Drawing.Size(125, 29);
+            this.buttonStack.TabIndex = 19;
+            this.buttonStack.Text = "Стек";
+            this.buttonStack.UseVisualStyleBackColor = true;
+            this.buttonStack.Click += new System.EventHandler(this.buttonStack_Click);
+            // 
+            // labelCompare
+            // 
+            this.labelCompare.AutoSize = true;
+            this.labelCompare.Location = new System.Drawing.Point(595, 370);
+            this.labelCompare.Name = "labelCompare";
+            this.labelCompare.Size = new System.Drawing.Size(167, 13);
+            this.labelCompare.TabIndex = 18;
+            this.labelCompare.Text = "Количество заполненных мест:";
+            // 
+            // maskedTextBoxCompare
+            // 
+            this.maskedTextBoxCompare.Location = new System.Drawing.Point(631, 386);
+            this.maskedTextBoxCompare.Name = "maskedTextBoxCompare";
+            this.maskedTextBoxCompare.Size = new System.Drawing.Size(125, 20);
+            this.maskedTextBoxCompare.TabIndex = 17;
+            // 
+            // buttonCompare
+            // 
+            this.buttonCompare.Location = new System.Drawing.Point(631, 408);
+            this.buttonCompare.Name = "buttonCompare";
+            this.buttonCompare.Size = new System.Drawing.Size(125, 28);
+            this.buttonCompare.TabIndex = 16;
+            this.buttonCompare.Text = "Сравнить";
+            this.buttonCompare.UseVisualStyleBackColor = true;
+            this.buttonCompare.Click += new System.EventHandler(this.buttonCompare_Click);
             // 
             // groupBoxStation
             // 
             this.groupBoxStation.Controls.Add(this.OutPutBus);
             this.groupBoxStation.Controls.Add(this.maskedTextBoxBus);
             this.groupBoxStation.Controls.Add(this.labelBus);
-            this.groupBoxStation.Location = new System.Drawing.Point(624, 106);
+            this.groupBoxStation.Location = new System.Drawing.Point(634, 219);
             this.groupBoxStation.Name = "groupBoxStation";
             this.groupBoxStation.Size = new System.Drawing.Size(125, 109);
-            this.groupBoxStation.TabIndex = 4;
+            this.groupBoxStation.TabIndex = 15;
             this.groupBoxStation.TabStop = false;
             this.groupBoxStation.Text = "Забрать транспортное средство";
             // 
@@ -109,40 +157,59 @@
             this.labelBus.TabIndex = 0;
             this.labelBus.Text = "Место";
             // 
-            // labelCompare
+            // buttonTrolleybus
             // 
-            this.labelCompare.AutoSize = true;
-            this.labelCompare.Location = new System.Drawing.Point(582, 230);
-            this.labelCompare.Name = "labelCompare";
-            this.labelCompare.Size = new System.Drawing.Size(167, 13);
-            this.labelCompare.TabIndex = 8;
-            this.labelCompare.Text = "Количество заполненных мест:";
+            this.buttonTrolleybus.Location = new System.Drawing.Point(634, 131);
+            this.buttonTrolleybus.Name = "buttonTrolleybus";
+            this.buttonTrolleybus.Size = new System.Drawing.Size(125, 40);
+            this.buttonTrolleybus.TabIndex = 14;
+            this.buttonTrolleybus.Text = "Припарковать троллейбус";
+            this.buttonTrolleybus.UseVisualStyleBackColor = true;
+            this.buttonTrolleybus.Click += new System.EventHandler(this.buttonSetTrolleybus_Click);
             // 
-            // maskedTextBoxCompare
+            // buttonBus
             // 
-            this.maskedTextBoxCompare.Location = new System.Drawing.Point(624, 246);
-            this.maskedTextBoxCompare.Name = "maskedTextBoxCompare";
-            this.maskedTextBoxCompare.Size = new System.Drawing.Size(125, 20);
-            this.maskedTextBoxCompare.TabIndex = 9;
+            this.buttonBus.Location = new System.Drawing.Point(634, 177);
+            this.buttonBus.Name = "buttonBus";
+            this.buttonBus.Size = new System.Drawing.Size(125, 38);
+            this.buttonBus.TabIndex = 13;
+            this.buttonBus.Text = "Припарковать автобус";
+            this.buttonBus.UseVisualStyleBackColor = true;
+            this.buttonBus.Click += new System.EventHandler(this.buttonSetBus_Click);
             // 
-            // buttonCompare
+            // buttonAddBusStation
             // 
-            this.buttonCompare.Location = new System.Drawing.Point(624, 272);
-            this.buttonCompare.Name = "buttonCompare";
-            this.buttonCompare.Size = new System.Drawing.Size(125, 39);
-            this.buttonCompare.TabIndex = 10;
-            this.buttonCompare.Text = "Сравнить";
-            this.buttonCompare.UseVisualStyleBackColor = true;
-            this.buttonCompare.Click += new System.EventHandler(this.buttonCompare_Click);
+            this.buttonAddBusStation.Location = new System.Drawing.Point(592, 12);
+            this.buttonAddBusStation.Name = "buttonAddBusStation";
+            this.buttonAddBusStation.Size = new System.Drawing.Size(122, 23);
+            this.buttonAddBusStation.TabIndex = 23;
+            this.buttonAddBusStation.Text = "Добавить парковку";
+            this.buttonAddBusStation.UseVisualStyleBackColor = true;
+            this.buttonAddBusStation.Click += new System.EventHandler(this.buttonAddBusStation_Click);
+            // 
+            // labelStation
+            // 
+            this.labelStation.AutoSize = true;
+            this.labelStation.Location = new System.Drawing.Point(682, 0);
+            this.labelStation.Name = "labelStation";
+            this.labelStation.Size = new System.Drawing.Size(57, 13);
+            this.labelStation.TabIndex = 24;
+            this.labelStation.Text = "Парковки";
             // 
             // FormBusStation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.buttonCompare);
-            this.Controls.Add(this.maskedTextBoxCompare);
+            this.Controls.Add(this.labelStation);
+            this.Controls.Add(this.buttonAddBusStation);
+            this.Controls.Add(this.buttonDeleteBusStation);
+            this.Controls.Add(this.listBoxBusStation);
+            this.Controls.Add(this.textBoxNewLevelName);
+            this.Controls.Add(this.buttonStack);
             this.Controls.Add(this.labelCompare);
+            this.Controls.Add(this.maskedTextBoxCompare);
+            this.Controls.Add(this.buttonCompare);
             this.Controls.Add(this.groupBoxStation);
             this.Controls.Add(this.buttonTrolleybus);
             this.Controls.Add(this.buttonBus);
@@ -160,14 +227,20 @@
         #endregion
 
         private System.Windows.Forms.PictureBox pictureBoxBusStation;
-        private System.Windows.Forms.Button buttonBus;
-        private System.Windows.Forms.Button buttonTrolleybus;
+        private System.Windows.Forms.Button buttonDeleteBusStation;
+        private System.Windows.Forms.ListBox listBoxBusStation;
+        private System.Windows.Forms.TextBox textBoxNewLevelName;
+        private System.Windows.Forms.Button buttonStack;
+        private System.Windows.Forms.Label labelCompare;
+        private System.Windows.Forms.MaskedTextBox maskedTextBoxCompare;
+        private System.Windows.Forms.Button buttonCompare;
         private System.Windows.Forms.GroupBox groupBoxStation;
         private System.Windows.Forms.Button OutPutBus;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxBus;
         private System.Windows.Forms.Label labelBus;
-        private System.Windows.Forms.Label labelCompare;
-        private System.Windows.Forms.MaskedTextBox maskedTextBoxCompare;
-        private System.Windows.Forms.Button buttonCompare;
+        private System.Windows.Forms.Button buttonTrolleybus;
+        private System.Windows.Forms.Button buttonBus;
+        private System.Windows.Forms.Button buttonAddBusStation;
+        private System.Windows.Forms.Label labelStation;
     }
 }
