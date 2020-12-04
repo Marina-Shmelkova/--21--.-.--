@@ -97,10 +97,7 @@ namespace WindowsFormsBus
             Brush brBlack = new SolidBrush(Color.Black);
             g.FillEllipse(brBlack, _startPosX + 50, _startPosY + 48, 22, 22);
             g.FillEllipse(brBlack, _startPosX + 130, _startPosY + 48, 22, 22);
-
-            //Белая полоса
-            Brush brWhite = new SolidBrush(Color.White);
-            g.FillRectangle(brWhite, _startPosX, _startPosY + 20, 200, 20);
+            
             //окно
             Brush br_yellow = new SolidBrush(Color.Yellow);
             //лобовое

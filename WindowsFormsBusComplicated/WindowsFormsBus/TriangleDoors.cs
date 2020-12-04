@@ -20,8 +20,41 @@ namespace WindowsFormsBus
             ViewDoors = digit;
             DopColor = dopColor;
         }
+        public void DrawElement(Graphics g, Color dopColor, float _startPosX, float _startPosY)
+        {
+            switch (viewForm)
+            {
+                case ViewDoorsEnum.One:
+                    DrawOne(g, dopColor, _startPosX, _startPosY);
+                    break;
 
-        public void DrawElement(Graphics g, Color dopColor, float x, float y)
+                case ViewDoorsEnum.Two:
+                    DrawTwo(g, dopColor, _startPosX, _startPosY);
+                    break;
+
+                case ViewDoorsEnum.Three:
+                    DrawThree(g, dopColor, _startPosX, _startPosY);
+                    break;
+            }
+        }
+        public void DrawOne(Graphics g, Color dopColor, float x, float y)
+        {
+            Brush brush = new SolidBrush(dopColor);
+            Pen penFramework = new Pen(Color.White);
+
+            PointF doorsMiddleOne = new PointF(x + 80, y + 50);
+            PointF doorsMiddleTwo = new PointF(x + 95, y + 10);
+            PointF doorsMiddleThree = new PointF(x + 110, y + 50);
+            PointF[] pointsmiddle = { doorsMiddleOne, doorsMiddleTwo, doorsMiddleThree };
+            g.FillPolygon(brush, pointsmiddle);
+
+            //Рамки
+
+            g.DrawLine(penFramework, x + 95, y + 11, x + 95, y + 49);//середина
+            g.DrawLine(penFramework, x + 88, y + 30, x + 103, y + 30);
+
+        }
+        public void DrawTwo(Graphics g, Color dopColor, float x, float y)
         {
             Brush brush = new SolidBrush(dopColor);
             Pen penFramework = new Pen(Color.White);
@@ -32,11 +65,6 @@ namespace WindowsFormsBus
             PointF[] pointsleft = { doorsLeftOne, doorsLeftTwo, doorsLeftThree };
             g.FillPolygon(brush, pointsleft);
 
-            PointF doorsMiddleOne = new PointF(x + 80, y + 50);
-            PointF doorsMiddleTwo = new PointF(x + 95, y + 10);
-            PointF doorsMiddleThree = new PointF(x + 110, y + 50);
-            PointF[] pointsmiddle = { doorsMiddleOne, doorsMiddleTwo, doorsMiddleThree };
-            g.FillPolygon(brush, pointsmiddle);
 
             PointF doorsRightOne = new PointF(x + 150, y + 50);
             PointF doorsRightTwo = new PointF(x + 165, y + 10);
@@ -45,16 +73,18 @@ namespace WindowsFormsBus
             g.FillPolygon(brush, pointsright);
 
             //Рамки
-
-
             g.DrawLine(penFramework, x + 25, y + 11, x + 25, y + 49);//левая
-            g.DrawLine(penFramework, x + 10, y + 30, x + 40, y + 30);
-
-            g.DrawLine(penFramework, x + 95, y + 11, x + 95, y + 49);//середина
-            g.DrawLine(penFramework, x + 80, y + 30, x + 110, y + 30);
+            g.DrawLine(penFramework, x + 17, y + 30, x + 33, y + 30);
 
             g.DrawLine(penFramework, x + 165, y + 11, x + 165, y + 49);//правая
-            g.DrawLine(penFramework, x + 150, y + 30, x + 180, y + 30);
+            g.DrawLine(penFramework, x + 157, y + 30, x + 173, y + 30);
+        }
+        public void DrawThree(Graphics g, Color dopColor, float x, float y)
+        {
+            Brush brush = new SolidBrush(dopColor);
+            Pen penFramework = new Pen(Color.White);
+            DrawOne(g, dopColor, x, y);
+            DrawTwo(g, dopColor, x, y);
         }
     }
 }

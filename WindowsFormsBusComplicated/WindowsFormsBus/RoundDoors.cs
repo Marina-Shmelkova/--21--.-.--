@@ -20,26 +20,54 @@ namespace WindowsFormsBus
             ViewDoors = digit;
             DopColor = dopColor;
         }
-        public void DrawElement(Graphics g, Color dopColor, float x, float y)
+        public void DrawElement(Graphics g, Color dopColor, float _startPosX, float _startPosY)
+        {
+            switch (viewForm)
+            {
+                case ViewDoorsEnum.One:
+                    DrawOne(g, dopColor, _startPosX, _startPosY);
+                    break;
+
+                case ViewDoorsEnum.Two:
+                    DrawTwo(g, dopColor, _startPosX, _startPosY);
+                    break;
+
+                case ViewDoorsEnum.Three:
+                    DrawThree(g, dopColor, _startPosX, _startPosY);
+                    break;
+            }
+        }
+
+        public void DrawOne(Graphics g, Color dopColor, float x, float y)
         {
             Brush brush = new SolidBrush(dopColor);
             Pen penFramework = new Pen(Color.White);
 
-            g.FillEllipse(brush, x + 10, y + 10, 30, 40);
             g.FillEllipse(brush, x + 80, y + 10, 30, 40);
-            g.FillEllipse(brush, x + 150, y + 10, 30, 40);
-
             //Рамки
-
-            g.DrawLine(penFramework, x + 25, y + 11, x + 25, y + 49);//левая
-            g.DrawLine(penFramework, x + 10, y + 30, x + 40, y + 30);
 
             g.DrawLine(penFramework, x + 95, y + 11, x + 95, y + 49);//середина
             g.DrawLine(penFramework, x + 80, y + 30, x + 110, y + 30);
+        }
+        public void DrawTwo(Graphics g, Color dopColor, float x, float y)
+        {
+            Brush brush = new SolidBrush(dopColor);
+            Pen penFramework = new Pen(Color.White);
+            g.FillEllipse(brush, x + 10, y + 10, 30, 40);
+            g.FillEllipse(brush, x + 150, y + 10, 30, 40);
+            //Рамки
+            g.DrawLine(penFramework, x + 25, y + 11, x + 25, y + 49);//левая
+            g.DrawLine(penFramework, x + 10, y + 30, x + 40, y + 30);
 
             g.DrawLine(penFramework, x + 165, y + 11, x + 165, y + 49);//правая
             g.DrawLine(penFramework, x + 150, y + 30, x + 180, y + 30);
-
+        }
+        public void DrawThree(Graphics g, Color dopColor, float x, float y)
+        {
+            Brush brush = new SolidBrush(dopColor);
+            Pen penFramework = new Pen(Color.White);
+            DrawOne(g, dopColor, x, y);
+            DrawTwo(g, dopColor, x, y);
         }
     }
 }

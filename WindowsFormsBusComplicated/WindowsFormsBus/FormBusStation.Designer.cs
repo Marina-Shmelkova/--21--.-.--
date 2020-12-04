@@ -40,10 +40,9 @@
             this.OutPutBus = new System.Windows.Forms.Button();
             this.maskedTextBoxBus = new System.Windows.Forms.MaskedTextBox();
             this.labelBus = new System.Windows.Forms.Label();
-            this.buttonTrolleybus = new System.Windows.Forms.Button();
-            this.buttonBus = new System.Windows.Forms.Button();
             this.buttonAddBusStation = new System.Windows.Forms.Button();
             this.labelStation = new System.Windows.Forms.Label();
+            this.buttonAddBus = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBusStation)).BeginInit();
             this.groupBoxStation.SuspendLayout();
             this.SuspendLayout();
@@ -157,26 +156,6 @@
             this.labelBus.TabIndex = 0;
             this.labelBus.Text = "Место";
             // 
-            // buttonTrolleybus
-            // 
-            this.buttonTrolleybus.Location = new System.Drawing.Point(634, 131);
-            this.buttonTrolleybus.Name = "buttonTrolleybus";
-            this.buttonTrolleybus.Size = new System.Drawing.Size(125, 40);
-            this.buttonTrolleybus.TabIndex = 14;
-            this.buttonTrolleybus.Text = "Припарковать троллейбус";
-            this.buttonTrolleybus.UseVisualStyleBackColor = true;
-            this.buttonTrolleybus.Click += new System.EventHandler(this.buttonSetTrolleybus_Click);
-            // 
-            // buttonBus
-            // 
-            this.buttonBus.Location = new System.Drawing.Point(634, 177);
-            this.buttonBus.Name = "buttonBus";
-            this.buttonBus.Size = new System.Drawing.Size(125, 38);
-            this.buttonBus.TabIndex = 13;
-            this.buttonBus.Text = "Припарковать автобус";
-            this.buttonBus.UseVisualStyleBackColor = true;
-            this.buttonBus.Click += new System.EventHandler(this.buttonSetBus_Click);
-            // 
             // buttonAddBusStation
             // 
             this.buttonAddBusStation.Location = new System.Drawing.Point(592, 12);
@@ -196,11 +175,22 @@
             this.labelStation.TabIndex = 24;
             this.labelStation.Text = "Парковки";
             // 
+            // buttonAddBus
+            // 
+            this.buttonAddBus.Location = new System.Drawing.Point(634, 152);
+            this.buttonAddBus.Name = "buttonAddBus";
+            this.buttonAddBus.Size = new System.Drawing.Size(122, 26);
+            this.buttonAddBus.TabIndex = 25;
+            this.buttonAddBus.Text = "Добавить ТС";
+            this.buttonAddBus.UseVisualStyleBackColor = true;
+            this.buttonAddBus.Click += new System.EventHandler(this.buttonSetBus_Click);
+            // 
             // FormBusStation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.buttonAddBus);
             this.Controls.Add(this.labelStation);
             this.Controls.Add(this.buttonAddBusStation);
             this.Controls.Add(this.buttonDeleteBusStation);
@@ -211,8 +201,6 @@
             this.Controls.Add(this.maskedTextBoxCompare);
             this.Controls.Add(this.buttonCompare);
             this.Controls.Add(this.groupBoxStation);
-            this.Controls.Add(this.buttonTrolleybus);
-            this.Controls.Add(this.buttonBus);
             this.Controls.Add(this.pictureBoxBusStation);
             this.Name = "FormBusStation";
             this.Text = "FormBusStation";
@@ -238,9 +226,8 @@
         private System.Windows.Forms.Button OutPutBus;
         private System.Windows.Forms.MaskedTextBox maskedTextBoxBus;
         private System.Windows.Forms.Label labelBus;
-        private System.Windows.Forms.Button buttonTrolleybus;
-        private System.Windows.Forms.Button buttonBus;
         private System.Windows.Forms.Button buttonAddBusStation;
         private System.Windows.Forms.Label labelStation;
+        private System.Windows.Forms.Button buttonAddBus;
     }
 }

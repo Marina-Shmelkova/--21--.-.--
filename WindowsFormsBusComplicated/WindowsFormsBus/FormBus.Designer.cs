@@ -34,7 +34,7 @@
             this.buttonRight = new System.Windows.Forms.Button();
             this.buttonDown = new System.Windows.Forms.Button();
             this.buttonLeft = new System.Windows.Forms.Button();
-            this.comboRod = new System.Windows.Forms.ComboBox();
+            this.comboCountDoors = new System.Windows.Forms.ComboBox();
             this.groupBoxDoors = new System.Windows.Forms.GroupBox();
             this.checkBoxTriangle = new System.Windows.Forms.CheckBox();
             this.buttonCreateTrolleybus = new System.Windows.Forms.Button();
@@ -57,9 +57,9 @@
             // 
             this.buttonCreate.Location = new System.Drawing.Point(13, 13);
             this.buttonCreate.Name = "buttonCreate";
-            this.buttonCreate.Size = new System.Drawing.Size(75, 23);
+            this.buttonCreate.Size = new System.Drawing.Size(103, 23);
             this.buttonCreate.TabIndex = 1;
-            this.buttonCreate.Text = "Создать";
+            this.buttonCreate.Text = "Создать автобус";
             this.buttonCreate.UseVisualStyleBackColor = true;
             this.buttonCreate.Click += new System.EventHandler(this.buttonCreateBus_Click);
             // 
@@ -107,24 +107,20 @@
             this.buttonLeft.UseVisualStyleBackColor = true;
             this.buttonLeft.Click += new System.EventHandler(this.buttonMove_Click);
             // 
-            // comboRod
+            // comboCountDoors
             // 
-            this.comboRod.FormattingEnabled = true;
-            this.comboRod.Items.AddRange(new object[] {
-            "1",
-            "2",
-            "3"});
-            this.comboRod.Location = new System.Drawing.Point(141, 14);
-            this.comboRod.Name = "comboRod";
-            this.comboRod.Size = new System.Drawing.Size(121, 21);
-            this.comboRod.TabIndex = 6;
-            this.comboRod.Text = "Количество рогов";
+            this.comboCountDoors.FormattingEnabled = true;
+            this.comboCountDoors.Location = new System.Drawing.Point(6, 87);
+            this.comboCountDoors.Name = "comboCountDoors";
+            this.comboCountDoors.Size = new System.Drawing.Size(121, 21);
+            this.comboCountDoors.TabIndex = 6;
+            this.comboCountDoors.Text = "Количество дверей";
             // 
             // groupBoxDoors
             // 
             this.groupBoxDoors.Controls.Add(this.checkBoxTriangle);
-            this.groupBoxDoors.Controls.Add(this.buttonCreateTrolleybus);
             this.groupBoxDoors.Controls.Add(this.checkBoxRound);
+            this.groupBoxDoors.Controls.Add(this.comboCountDoors);
             this.groupBoxDoors.Controls.Add(this.checkBoxRectangle);
             this.groupBoxDoors.Location = new System.Drawing.Point(582, 14);
             this.groupBoxDoors.Name = "groupBoxDoors";
@@ -145,7 +141,7 @@
             // 
             // buttonCreateTrolleybus
             // 
-            this.buttonCreateTrolleybus.Location = new System.Drawing.Point(0, 87);
+            this.buttonCreateTrolleybus.Location = new System.Drawing.Point(582, 130);
             this.buttonCreateTrolleybus.Name = "buttonCreateTrolleybus";
             this.buttonCreateTrolleybus.Size = new System.Drawing.Size(150, 23);
             this.buttonCreateTrolleybus.TabIndex = 6;
@@ -179,7 +175,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
             this.Controls.Add(this.groupBoxDoors);
-            this.Controls.Add(this.comboRod);
+            this.Controls.Add(this.buttonCreateTrolleybus);
             this.Controls.Add(this.buttonLeft);
             this.Controls.Add(this.buttonDown);
             this.Controls.Add(this.buttonRight);
@@ -203,7 +199,7 @@
         private System.Windows.Forms.Button buttonRight;
         private System.Windows.Forms.Button buttonDown;
         private System.Windows.Forms.Button buttonLeft;
-        private System.Windows.Forms.ComboBox comboRod;
+        private System.Windows.Forms.ComboBox comboCountDoors;
         private System.Windows.Forms.GroupBox groupBoxDoors;
         private System.Windows.Forms.CheckBox checkBoxTriangle;
         private System.Windows.Forms.Button buttonCreateTrolleybus;
