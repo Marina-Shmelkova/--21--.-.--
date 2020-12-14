@@ -22,7 +22,7 @@ namespace WindowsFormsBus
             stationCollection = new BusStationCollection(pictureBoxBusStation.Width,
 pictureBoxBusStation.Height);
             busStack = new Stack<Vehicle>();
-            //Draw();
+            Draw();
         }
         /// Заполнение listBoxLevels
         /// </summary>
@@ -120,7 +120,7 @@ pictureBoxBusStation.Height);
                     MessageBox.Show("Автобус не удалось поставить");
                 }
             }
-        }       
+        }
         /// <summary>
         /// Обработка нажатия кнопки "Забрать"
         /// </summary>
@@ -184,6 +184,80 @@ pictureBoxBusStation.Height);
             else
             {
                 MessageBox.Show("Стек пуст");
+            }
+        }
+
+        private void сохранитьОднуПарковкуToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogBus.ShowDialog() == DialogResult.OK)
+            {
+                if (listBoxBusStation.SelectedIndex > -1)
+                {
+                    if (stationCollection.SaveData(saveFileDialogBus.FileName, listBoxBusStation.SelectedItem.ToString()))
+                    {
+                        MessageBox.Show("Сохранение прошло успешно", "Результат",
+                        MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Не сохранилось", "Результат",
+                        MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+
+        private void сохранитьВсеПарковкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialogBus.ShowDialog() == DialogResult.OK)
+            {
+                if (stationCollection.SaveData(saveFileDialogBus.FileName))
+                {
+                    MessageBox.Show("Сохранение прошло успешно", "Результат",
+                    MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    MessageBox.Show("Не сохранилось", "Результат",
+                    MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+        private void загрузитьОднуПарковкуToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogBus.ShowDialog() == DialogResult.OK)
+            {
+                if (stationCollection.LoadBusStation(openFileDialogBus.FileName))
+                {
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                    ReloadLevels();
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void загрузитьВсеПарковкиToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (openFileDialogBus.ShowDialog() == DialogResult.OK)
+            {
+                if (stationCollection.LoadBusStationCollection(openFileDialogBus.FileName))
+                {
+                    MessageBox.Show("Загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                    ReloadLevels();
+                    Draw();
+                }
+                else
+                {
+                    MessageBox.Show("Не загрузили", "Результат", MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                }
             }
         }
     }

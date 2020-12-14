@@ -43,16 +43,27 @@
             this.buttonAddBusStation = new System.Windows.Forms.Button();
             this.labelStation = new System.Windows.Forms.Label();
             this.buttonAddBus = new System.Windows.Forms.Button();
+            this.файлToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.сохранитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.однуПарковкуToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.всеПарковкиToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.загрузитьToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.однуПарковкуToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.всеПарковкиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.saveFileDialogBus = new System.Windows.Forms.SaveFileDialog();
+            this.openFileDialogBus = new System.Windows.Forms.OpenFileDialog();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBusStation)).BeginInit();
             this.groupBoxStation.SuspendLayout();
+            this.menuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // pictureBoxBusStation
             // 
             this.pictureBoxBusStation.Dock = System.Windows.Forms.DockStyle.Left;
-            this.pictureBoxBusStation.Location = new System.Drawing.Point(0, 0);
+            this.pictureBoxBusStation.Location = new System.Drawing.Point(0, 24);
             this.pictureBoxBusStation.Name = "pictureBoxBusStation";
-            this.pictureBoxBusStation.Size = new System.Drawing.Size(553, 450);
+            this.pictureBoxBusStation.Size = new System.Drawing.Size(553, 426);
             this.pictureBoxBusStation.TabIndex = 1;
             this.pictureBoxBusStation.TabStop = false;
             // 
@@ -185,6 +196,80 @@
             this.buttonAddBus.UseVisualStyleBackColor = true;
             this.buttonAddBus.Click += new System.EventHandler(this.buttonSetBus_Click);
             // 
+            // файлToolStripMenuItem
+            // 
+            this.файлToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.сохранитьToolStripMenuItem,
+            this.загрузитьToolStripMenuItem});
+            this.файлToolStripMenuItem.Name = "файлToolStripMenuItem";
+            this.файлToolStripMenuItem.Size = new System.Drawing.Size(48, 20);
+            this.файлToolStripMenuItem.Text = "Файл";
+            // 
+            // сохранитьToolStripMenuItem
+            // 
+            this.сохранитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.однуПарковкуToolStripMenuItem1,
+            this.всеПарковкиToolStripMenuItem1});
+            this.сохранитьToolStripMenuItem.Name = "сохранитьToolStripMenuItem";
+            this.сохранитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.сохранитьToolStripMenuItem.Text = "Сохранить";
+            // 
+            // однуПарковкуToolStripMenuItem1
+            // 
+            this.однуПарковкуToolStripMenuItem1.Name = "однуПарковкуToolStripMenuItem1";
+            this.однуПарковкуToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.однуПарковкуToolStripMenuItem1.Text = "Текущую парковку";
+            this.однуПарковкуToolStripMenuItem1.Click += new System.EventHandler(this.сохранитьОднуПарковкуToolStripMenuItem1_Click);
+            // 
+            // всеПарковкиToolStripMenuItem1
+            // 
+            this.всеПарковкиToolStripMenuItem1.Name = "всеПарковкиToolStripMenuItem1";
+            this.всеПарковкиToolStripMenuItem1.Size = new System.Drawing.Size(180, 22);
+            this.всеПарковкиToolStripMenuItem1.Text = "Все парковки";
+            this.всеПарковкиToolStripMenuItem1.Click += new System.EventHandler(this.сохранитьВсеПарковкиToolStripMenuItem_Click);
+            // 
+            // загрузитьToolStripMenuItem
+            // 
+            this.загрузитьToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.однуПарковкуToolStripMenuItem,
+            this.всеПарковкиToolStripMenuItem});
+            this.загрузитьToolStripMenuItem.Name = "загрузитьToolStripMenuItem";
+            this.загрузитьToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.загрузитьToolStripMenuItem.Text = "Загрузить";
+            // 
+            // однуПарковкуToolStripMenuItem
+            // 
+            this.однуПарковкуToolStripMenuItem.Name = "однуПарковкуToolStripMenuItem";
+            this.однуПарковкуToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.однуПарковкуToolStripMenuItem.Text = "Одну парковку";
+            this.однуПарковкуToolStripMenuItem.Click += new System.EventHandler(this.загрузитьОднуПарковкуToolStripMenuItem_Click);
+            // 
+            // всеПарковкиToolStripMenuItem
+            // 
+            this.всеПарковкиToolStripMenuItem.Name = "всеПарковкиToolStripMenuItem";
+            this.всеПарковкиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.всеПарковкиToolStripMenuItem.Text = "Все парковки";
+            this.всеПарковкиToolStripMenuItem.Click += new System.EventHandler(this.загрузитьВсеПарковкиToolStripMenuItem_Click);
+            // 
+            // menuStrip1
+            // 
+            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.файлToolStripMenuItem});
+            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.Name = "menuStrip1";
+            this.menuStrip1.Size = new System.Drawing.Size(800, 24);
+            this.menuStrip1.TabIndex = 26;
+            this.menuStrip1.Text = "menuStripBus";
+            // 
+            // saveFileDialogBus
+            // 
+            this.saveFileDialogBus.Filter = "txt file | *.txt";
+            // 
+            // openFileDialogBus
+            // 
+            this.openFileDialogBus.FileName = "openFileDialogBus";
+            this.openFileDialogBus.Filter = "txt file | *.txt";
+            // 
             // FormBusStation
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -202,11 +287,15 @@
             this.Controls.Add(this.buttonCompare);
             this.Controls.Add(this.groupBoxStation);
             this.Controls.Add(this.pictureBoxBusStation);
+            this.Controls.Add(this.menuStrip1);
+            this.MainMenuStrip = this.menuStrip1;
             this.Name = "FormBusStation";
             this.Text = "FormBusStation";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBoxBusStation)).EndInit();
             this.groupBoxStation.ResumeLayout(false);
             this.groupBoxStation.PerformLayout();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -229,5 +318,15 @@
         private System.Windows.Forms.Button buttonAddBusStation;
         private System.Windows.Forms.Label labelStation;
         private System.Windows.Forms.Button buttonAddBus;
+        private System.Windows.Forms.ToolStripMenuItem файлToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem сохранитьToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem загрузитьToolStripMenuItem;
+        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.SaveFileDialog saveFileDialogBus;
+        private System.Windows.Forms.OpenFileDialog openFileDialogBus;
+        private System.Windows.Forms.ToolStripMenuItem однуПарковкуToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem всеПарковкиToolStripMenuItem1;
+        private System.Windows.Forms.ToolStripMenuItem однуПарковкуToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem всеПарковкиToolStripMenuItem;
     }
 }
