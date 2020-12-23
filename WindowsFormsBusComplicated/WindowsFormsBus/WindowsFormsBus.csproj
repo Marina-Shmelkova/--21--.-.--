@@ -55,7 +55,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Bus.cs" />
+    <Compile Include="BusComparer.cs" />
     <Compile Include="BusStation.cs" />
+    <Compile Include="BusStationAlreadyHaveException.cs" />
     <Compile Include="BusStationCollection.cs" />
     <Compile Include="BusStationNotFoundException.cs" />
     <Compile Include="BusStationOccupiedPlaceException.cs" />
