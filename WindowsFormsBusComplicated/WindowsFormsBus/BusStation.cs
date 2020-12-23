@@ -59,7 +59,7 @@ namespace WindowsFormsBus
         {
             if (b._places.Count >= b._maxCount)
             {
-                return false;
+                throw new BusStationOverflowException();
             }
             b._places.Add(bus);
             return true;
@@ -75,7 +75,7 @@ namespace WindowsFormsBus
         {
             if (index < -1 || index > b._places.Count)
             {
-                return null;
+                throw new BusStationNotFoundException(index);
             }
             T bus = b._places[index];
             b._places.RemoveAt(index);

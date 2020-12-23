@@ -190,11 +190,11 @@ namespace WindowsFormsBus
         /// </summary>
         /// <param name="filename"></param>
         /// <returns></returns>
-        public bool LoadBusStationCollection(string filename)
+        public void LoadBusStationCollection(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
             using (StreamReader sr = new StreamReader(filename))
             {
@@ -207,7 +207,7 @@ namespace WindowsFormsBus
                 else
                 {
                     //если нет такой записи, то это не те данные
-                    return false;
+                    throw new FormatException("Неверный формат файла");
                 }
                 line = sr.ReadLine();
                 Vehicle bus = null;
@@ -231,20 +231,19 @@ namespace WindowsFormsBus
                         var result = stationStages[key] + bus;
                         if (!result)
                         {
-                            return false;
+                            throw new NullReferenceException();
                         }
                         line = sr.ReadLine();
                     }
                 }
-                return true;
             }
         }
 
-        public bool LoadBusStation(string filename)
+        public void LoadBusStation(string filename)
         {
             if (!File.Exists(filename))
             {
-                return false;
+                throw new FileNotFoundException();
             }
             using (StreamReader sr = new StreamReader(filename))
             {
@@ -254,7 +253,7 @@ namespace WindowsFormsBus
                 else
                 {
                     //если нет такой записи, то это не те данные
-                    return false;
+                    throw new FormatException("Неверный формат файла");
                 }
                 line = sr.ReadLine();
                 Vehicle bus = null;
@@ -285,13 +284,11 @@ namespace WindowsFormsBus
                         var result = stationStages[key] + bus;
                         if (!result)
                         {
-                            return false;
+                            throw new NullReferenceException();
                         }
                         line = sr.ReadLine();
                     }
                 }
-                else return false;
-                return true;
             }
         }
     }    
