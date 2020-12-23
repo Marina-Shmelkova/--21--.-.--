@@ -132,12 +132,16 @@ namespace WindowsFormsBus
         {
             get
             {
-                if (index >= 0 && index < _maxCount)
+                if (index >= 0 && index < _places.Count)
                 {
                     return _places[index];
                 }
                 return null;
             }
+        }       
+        public void ClearPlaces()
+        {
+            _places.Clear();
         }
     }
 }

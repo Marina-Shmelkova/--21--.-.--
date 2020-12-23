@@ -19,7 +19,7 @@ namespace WindowsFormsBus
         public int count_Doors { private set; get; }
         public string DoorsForm { private set; get; }
 
-        IDoorsElements DoorsElements;
+        private     IDoorsElements DoorsElements;
         public Trolleybus(int maxSpeed, float weight, Color mainColor, Color dopColor, bool rodPantograph, bool doors, bool strip, int count_doors, string doorsForm) :
              base(maxSpeed, weight, mainColor, 100, 60)
         {
@@ -42,15 +42,52 @@ namespace WindowsFormsBus
                 DoorsElements = new RoundDoors(count_doors, dopColor);
             }
         }
+        /// <summary>
+        /// Конструктор для загрузки с файла
+        /// </summary>
+        /// <param name="info"></param>
+        public Trolleybus(string info) : base(info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 9)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+                DopColor = Color.FromName(strs[3]);
+                RodPantograph = Convert.ToBoolean(strs[4]);
+                Doors = Convert.ToBoolean(strs[5]);
+                Strip = Convert.ToBoolean(strs[6]);
+                count_Doors = Convert.ToInt32(strs[7]);
+                DoorsForm = strs[8];
+                SetDoors();
+            }
+        }
         public void SetDopColor(Color color)
         {
             DopColor = color;
+            SetDoors();
         }
         public void SetDoors(IDoorsElements doors)
         {
             DoorsElements = doors;
             DoorsForm = DoorsElements.GetType().Name;
 
+        }
+        private void SetDoors()
+        {
+            if (DoorsForm == "TriangleDoors")
+            {
+                DoorsElements = new TriangleDoors(count_Doors, DopColor);
+            }
+            if (DoorsForm == "RectangleDoors")
+            {
+                DoorsElements = new RectangleDoors(count_Doors, DopColor);
+            }
+            if (DoorsForm == "RoundDoors")
+            {
+                DoorsElements = new RoundDoors(count_Doors,DopColor);
+            }
         }
         public void SetCountDoors(int rod_count)
         {
@@ -85,6 +122,12 @@ namespace WindowsFormsBus
                 g.DrawLine(pen, _startPosX + 20, _startPosY - 20, _startPosX + 10, _startPosY - 20);
                 g.DrawLine(pen, _startPosX + 100, _startPosY, _startPosX + 20, _startPosY - 20);
             }
+        }
+        public override string ToString()
+        {
+            return
+           $"{base.ToString()}{separator}{DopColor.Name}{separator}{RodPantograph}{separator}" +
+           $"{Doors}{separator}{Strip}{separator}{count_Doors}"+ $"{separator}{DoorsForm}";
         }
     }
 }

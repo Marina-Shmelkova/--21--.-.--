@@ -14,6 +14,9 @@ namespace WindowsFormsBus
         /// Высота отрисовки троллейбуса
         /// </summary>
         private readonly int busHeight = 100;
+        /// Разделитель для записи информации по объекту в файл
+        /// </summary>
+        protected readonly char separator = ';';
         /// Загруженность пассажирами 
         /// /// Максимальная скорость
         /// </summary>
@@ -35,6 +38,20 @@ namespace WindowsFormsBus
         /// <param name="mainColor">Основной цвет кузова</param>
         /// <param name="carWidth">Ширина отрисовки автобуса</param>
         /// <param name="carHeight">Высота отрисовки автобуса</param>
+        /// /// <summary>
+        /// Конструктор для загрузки с файла
+        /// </summary>
+        /// <param name="info">Информация по объекту</param>
+        public Bus(string info)
+        {
+            string[] strs = info.Split(separator);
+            if (strs.Length == 3)
+            {
+                MaxSpeed = Convert.ToInt32(strs[0]);
+                Weight = Convert.ToInt32(strs[1]);
+                MainColor = Color.FromName(strs[2]);
+            }
+        }
         protected Bus(int maxSpeed, float weight, Color mainColor, int busWidth, int
        busHeight)
         {
@@ -105,6 +122,9 @@ namespace WindowsFormsBus
             g.DrawRectangle(penFramework, _startPosX + 190, _startPosY + 10, 10, 30);//лобовое
             g.DrawRectangle(pen, _startPosX, _startPosY, 200, 50);
         }
-
+        public override string ToString()
+        {
+            return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
     }
 }
