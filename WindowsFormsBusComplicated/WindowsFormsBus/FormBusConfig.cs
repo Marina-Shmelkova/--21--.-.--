@@ -192,13 +192,13 @@ DragDropEffects.Copy);
                 switch (((Label)sender).Text)
                 {
                     case "Квадратные":
-                        doors = new RectangleDoors(b.count_Doors, b.DopColor);
+                        doors = new RectangleDoors(b.Count_Doors, b.DopColor);
                         break;
                     case "Круглые":
-                        doors = new RoundDoors(b.count_Doors, b.DopColor);
+                        doors = new RoundDoors(b.Count_Doors, b.DopColor);
                         break;
                     case "Треугольные":
-                        doors = new TriangleDoors(b.count_Doors, b.DopColor);
+                        doors = new TriangleDoors(b.Count_Doors, b.DopColor);
                         break;
                 }
                 if (doors != null)

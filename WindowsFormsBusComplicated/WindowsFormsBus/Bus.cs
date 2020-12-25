@@ -4,9 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Drawing;
+using System.Collections;
+
 namespace WindowsFormsBus
 {
-    public class Bus : Vehicle
+    public class Bus : Vehicle, IEquatable<Bus>, IComparable<Bus>, IEnumerator<object>, IEnumerable<object>
     {
         /// Ширина отрисовки троллейбуса
         private readonly int busWidth = 300;
@@ -17,6 +19,10 @@ namespace WindowsFormsBus
         /// Разделитель для записи информации по объекту в файл
         /// </summary>
         protected readonly char separator = ';';
+        private int _currentIndex = -1;
+        public new LinkedList<object> objectProperties = new LinkedList<object>();
+        public new object Current => objectProperties.Find(_currentIndex);
+        object IEnumerator<object>.Current => objectProperties.Find(_currentIndex);
         /// Загруженность пассажирами 
         /// /// Максимальная скорость
         /// </summary>
@@ -50,6 +56,9 @@ namespace WindowsFormsBus
                 MaxSpeed = Convert.ToInt32(strs[0]);
                 Weight = Convert.ToInt32(strs[1]);
                 MainColor = Color.FromName(strs[2]);
+                objectProperties.AddLast(MaxSpeed);
+                objectProperties.AddLast(Weight);
+                objectProperties.AddLast(MainColor);
             }
         }
         protected Bus(int maxSpeed, float weight, Color mainColor, int busWidth, int
@@ -60,6 +69,9 @@ namespace WindowsFormsBus
             MainColor = mainColor;
             this.busWidth = busWidth;
             this.busHeight = busHeight;
+            objectProperties.AddLast(MaxSpeed);
+            objectProperties.AddLast(Weight);
+            objectProperties.AddLast(MainColor);
         }
         public override void MoveTransport(Direction direction)
         {
@@ -125,6 +137,96 @@ namespace WindowsFormsBus
         public override string ToString()
         {
             return $"{MaxSpeed}{separator}{Weight}{separator}{MainColor.Name}";
+        }
+        /// <summary>
+        /// Метод интерфейса IEquatable для класса Bus
+        /// </summary>
+        /// <param name="other"></param>
+        /// <returns></returns>
+        public bool Equals(Bus other)
+        {
+            if (other == null)
+            {
+                return false;
+            }
+            if (GetType().Name != other.GetType().Name)
+            {
+                return false;
+            }
+            if (MaxSpeed != other.MaxSpeed)
+            {
+                return false;
+            }
+            if (Weight != other.Weight)
+            {
+                return false;
+            }
+            if (MainColor != other.MainColor)
+            {
+                return false;
+            }
+            return true;
+        }
+        /// <summary>
+        /// Перегрузка метода от object
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        public override bool Equals(Object obj)
+        {
+            if (obj == null)
+            {
+                return false;
+            }
+            if (!(obj is Bus busObj))
+            {
+                return false;
+            }
+
+            else
+            {
+                return Equals(busObj);
+            }
+        }
+        public int CompareTo(Bus b)
+        {
+            if (MaxSpeed != b.MaxSpeed)
+            {
+                return MaxSpeed.CompareTo(b.MaxSpeed);
+            }
+            if (Weight != b.Weight)
+            {
+                return Weight.CompareTo(b.Weight);
+            }
+            if (MainColor != b.MainColor)
+            {
+                return MainColor.Name.CompareTo(b.MainColor.Name);
+            }
+            return 0;
+        }
+        public void Dispose() 
+        { 
+
+        }
+        public bool MoveNext()
+        {
+            _currentIndex++;
+            return _currentIndex < 8;
+        }
+
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+
+        public IEnumerator<object> GetEnumerator()
+        {
+            return (IEnumerator<object>)objectProperties;
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
         }
     }
 }

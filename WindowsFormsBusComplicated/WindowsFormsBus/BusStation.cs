@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -7,7 +8,8 @@ using System.Threading.Tasks;
 
 namespace WindowsFormsBus
 {
-    public class BusStation<T, R> where T : class, ITransport where R : class, IDoorsElements
+    public class BusStation<T, R> : IEnumerator<T>, IEnumerable<T>
+        where T : class, ITransport where R : class, IDoorsElements
     {
         /// <summary>
         /// Массив объектов, которые храним
@@ -33,6 +35,11 @@ namespace WindowsFormsBus
         /// Максимальное количество мест на парковке
         /// </summary>
         private readonly int _maxCount;
+        /// Текущий элемент для вывода через IEnumerator (будет обращаться по своему индексу к ключу словаря, по которму будет возвращаться запись)
+        /// </summary>
+        private int _currentIndex;
+        public T Current => _places[_currentIndex];
+        object IEnumerator.Current => _places[_currentIndex];
         /// <summary>
         /// Конструктор
         /// </summary>
@@ -46,6 +53,7 @@ namespace WindowsFormsBus
             pictureWidth = picWidth;
             pictureHeight = picHeight;
             _maxCount = width * height;
+            _currentIndex = -1;
 
         }
         /// <summary>
@@ -55,11 +63,15 @@ namespace WindowsFormsBus
         /// <param name="p">Парковка</param>
         /// <param name="car">Добавляемый автомобиль</param>
         /// <returns></returns>
-        public static bool operator +(BusStation<T, R> b, T bus)
+        public static bool operator +(BusStation<T,R> b, T bus)
         {
             if (b._places.Count >= b._maxCount)
             {
                 throw new BusStationOverflowException();
+            }
+            if (b._places.Contains(bus))
+            {
+                throw new BusStationAlreadyHaveException();
             }
             b._places.Add(bus);
             return true;
@@ -142,6 +154,50 @@ namespace WindowsFormsBus
         public void ClearPlaces()
         {
             _places.Clear();
+        }
+        /// <summary>
+        /// Сортировка автомобилей на парковке
+        /// </summary>
+        public void Sort() => _places.Sort((IComparer<T>)new BusComparer());
+        /// <summary>
+        /// Метод интерфейса IEnumerator, вызываемый при удалении объекта
+        /// </summary>
+        public void Dispose()
+        {
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerator для перехода к следующему элементу или началу коллекции
+        /// </summary>
+        /// <returns></returns>
+        public bool MoveNext()
+        {
+            if (_currentIndex + 1 >= _places.Count)
+            {
+                return false;
+            }
+            _currentIndex++;
+            return true;
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerator для сброса и возврата к началу коллекции
+        /// </summary>
+        public void Reset()
+        {
+            _currentIndex = -1;
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerable
+        /// </summary>
+        public IEnumerator<T> GetEnumerator()
+        {
+            return this;
+        }
+        /// <summary>
+        /// Метод интерфейса IEnumerable
+        /// </summary>
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this;
         }
     }
 }
