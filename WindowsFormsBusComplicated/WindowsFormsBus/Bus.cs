@@ -56,6 +56,9 @@ namespace WindowsFormsBus
                 MaxSpeed = Convert.ToInt32(strs[0]);
                 Weight = Convert.ToInt32(strs[1]);
                 MainColor = Color.FromName(strs[2]);
+                objectProperties.AddLast(MaxSpeed);
+                objectProperties.AddLast(Weight);
+                objectProperties.AddLast(MainColor);
             }
         }
         protected Bus(int maxSpeed, float weight, Color mainColor, int busWidth, int
@@ -66,6 +69,9 @@ namespace WindowsFormsBus
             MainColor = mainColor;
             this.busWidth = busWidth;
             this.busHeight = busHeight;
+            objectProperties.AddLast(MaxSpeed);
+            objectProperties.AddLast(Weight);
+            objectProperties.AddLast(MainColor);
         }
         public override void MoveTransport(Direction direction)
         {

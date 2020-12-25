@@ -18,7 +18,7 @@ namespace WindowsFormsBus
         public bool RodPantograph { private set; get; }
         public bool Doors { private set; get; }
         public bool Strip { private set; get; }
-        public int count_Doors { private set; get; }
+        public int Count_Doors { private set; get; }
         public string DoorsForm { private set; get; }
         private int _currentIndex = -1;
         public new LinkedList<object> objectProperties = new LinkedList<object>();
@@ -48,6 +48,15 @@ namespace WindowsFormsBus
             {
                 DoorsElements = new RoundDoors(count_doors, dopColor);
             }
+            objectProperties.AddLast(MaxSpeed);
+            objectProperties.AddLast(Weight);
+            objectProperties.AddLast(MainColor);
+            objectProperties.AddLast(DopColor);
+            objectProperties.AddLast(RodPantograph);
+            objectProperties.AddLast(Doors);
+            objectProperties.AddLast(Strip);
+            objectProperties.AddLast(Count_Doors);
+            objectProperties.AddLast(DoorsForm);
         }
         /// <summary>
         /// Конструктор для загрузки с файла
@@ -65,8 +74,17 @@ namespace WindowsFormsBus
                 RodPantograph = Convert.ToBoolean(strs[4]);
                 Doors = Convert.ToBoolean(strs[5]);
                 Strip = Convert.ToBoolean(strs[6]);
-                count_Doors = Convert.ToInt32(strs[7]);
+                Count_Doors = Convert.ToInt32(strs[7]);
                 DoorsForm = strs[8];
+                objectProperties.AddLast(MaxSpeed);
+                objectProperties.AddLast(Weight);
+                objectProperties.AddLast(MainColor);
+                objectProperties.AddLast(DopColor);
+                objectProperties.AddLast(RodPantograph);
+                objectProperties.AddLast(Doors);
+                objectProperties.AddLast(Strip);
+                objectProperties.AddLast(Count_Doors);
+                objectProperties.AddLast(DoorsForm);
                 SetDoors();
             }
         }
@@ -85,20 +103,20 @@ namespace WindowsFormsBus
         {
             if (DoorsForm == "TriangleDoors")
             {
-                DoorsElements = new TriangleDoors(count_Doors, DopColor);
+                DoorsElements = new TriangleDoors(Count_Doors, DopColor);
             }
             if (DoorsForm == "RectangleDoors")
             {
-                DoorsElements = new RectangleDoors(count_Doors, DopColor);
+                DoorsElements = new RectangleDoors(Count_Doors, DopColor);
             }
             if (DoorsForm == "RoundDoors")
             {
-                DoorsElements = new RoundDoors(count_Doors,DopColor);
+                DoorsElements = new RoundDoors(Count_Doors,DopColor);
             }
         }
         public void SetCountDoors(int rod_count)
         {
-            count_Doors = rod_count;
+            Count_Doors = rod_count;
         }
         /// Отрисовка троллейбуса
         /// </summary>
@@ -134,7 +152,7 @@ namespace WindowsFormsBus
         {
             return
            $"{base.ToString()}{separator}{DopColor.Name}{separator}{RodPantograph}{separator}" +
-           $"{Doors}{separator}{Strip}{separator}{count_Doors}"+ $"{separator}{DoorsForm}";
+           $"{Doors}{separator}{Strip}{separator}{Count_Doors}"+ $"{separator}{DoorsForm}";
         }
         /// Метод интерфейса IEquatable для класса дочернего Trolleybus
         /// </summary>
@@ -223,9 +241,9 @@ namespace WindowsFormsBus
             {
                 return DoorsForm.CompareTo(b.DoorsForm);
             }
-            if (count_Doors != b.count_Doors)
+            if (Count_Doors != b.Count_Doors)
             {
-                return count_Doors.CompareTo(b.count_Doors);
+                return Count_Doors.CompareTo(b.Count_Doors);
             }
             if (Strip != b.Strip)
             {
